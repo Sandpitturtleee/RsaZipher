@@ -95,13 +95,13 @@ void keys() {
     cout << endl;
 }
 void password() {
-    char password[12];
-    srand(time(NULL));
-    char characters1[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    char characters2[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*(){}[]|:'<>?,./";
     int choice = 0;
     int amount = 0;
     int lenght = 0;
+    char *password = new char[lenght];
+    srand(time(NULL));
+    char characters1[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    char characters2[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*(){}[]|:'<>?,./";
     cout << "0 - bez znakow specjalnych" << endl;
     cout << "1 - z znakami specjalnymi" << endl;
     cin >> choice;
@@ -134,7 +134,7 @@ void password() {
             cout << endl;
         }
     }
-
+    delete [] password;
 }
 void cipher() {
     long long eKey = 0;
