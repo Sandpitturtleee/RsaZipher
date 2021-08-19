@@ -6,18 +6,22 @@ using namespace std;
 int main()
 {
     int lenght = 0;
-    char tekst[13];    
-    int tekstAscii[33];
-    cout<<"Podaj tekst: ";
-    cin>>tekst;
-    cout<<strlen(tekst)<<endl;
-    for(int i=0;i<13;i++)
+    cout<<"Podaj dlugosc hasla: ";
+    cin>>lenght;
+    char *password=new char[lenght];    
+    int *passwordAscii=new int[lenght];
+    cout<<"Podaj haslo: ";
+    cin>>password;
+    //cout<<strlen(password)<<endl;
+    for(int i=0;i<lenght;i++)
     {
         
-        tekstAscii[i]=int(tekst[i]);
-        cout<<tekstAscii[i];
+        passwordAscii[i]=int(password[i]);
+        cout<<passwordAscii[i];
     }
     cout<<endl;
+    delete [] password;
+    delete [] passwordAscii;
     return 0;
     //33
 }
