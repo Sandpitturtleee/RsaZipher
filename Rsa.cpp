@@ -141,26 +141,66 @@ void cipher() {
     long long nKey = 0;
     long long number = 0;
     long long c = 0;
+    int lenght = 0;
+    char *password=new char[lenght];    
+    int *passwordAscii=new int[lenght*32];
     cout << "Podaj klucz publiczny: " << endl;
     cin >> eKey;
     cin >> nKey;
     cout << "Klucz publiczny: (" <<eKey<<","<<nKey<<")" <<endl;
-    cout << "Podaj liczbe do zaczyfrowania: ";
-    cin >> number;
-    cout << "Zaszyfrowana liczba: " << pMod(number, eKey, nKey);
+    //cout << "Podaj haslo do zaczyfrowania: ";
+    //cin >> number;
+    cout<<"Podaj dlugosc hasla: ";
+    cin>>lenght;
+    cout<<"Podaj haslo: ";
+    cin>>password;
+    //cout<<strlen(password)<<endl;
+    cout<<"Zaszyfrowana liczba: ";
+    for(int i=0;i<lenght;i++)
+    {
+        
+        passwordAscii[i]=int(password[i]);
+        passwordAscii[i]=pMod(passwordAscii[i],eKey,nKey);
+        password[i]=char(passwordAscii[i]);
+        cout<<password[i];
+    }
+    cout<<endl;
+    //cout << "Zaszyfrowana liczba: " << pMod(number, eKey, nKey);
+    delete [] password;
+    delete [] passwordAscii;
 }
 void decipher(){
     long long dKey = 0;
     long long nKey = 0;
     long long number = 0;
     long long c = 0;
+    int lenght = 0;
+    char *password=new char[lenght];    
+    int *passwordAscii=new int[lenght*3];
     cout << "Podaj klucz tajny: " << endl;
     cin >> dKey;
     cin >> nKey;
     cout << "Klucz tajny: (" << dKey << "," << nKey << ")" << endl;
-    cout << "Podaj liczbe do odszyfrowania: ";
-    cin >> number;
-    cout << "Odszyfrowana liczba: " << pMod(number, dKey, nKey);
+    //cout << "Podaj liczbe do odszyfrowania: ";
+    //cin >> number;
+    //cout << "Odszyfrowana liczba: " << pMod(number, dKey, nKey);
+    cout<<"Podaj dlugosc hasla: ";
+    cin>>lenght;
+    cout<<"Podaj haslo: ";
+    cin>>password;
+    //cout<<strlen(password)<<endl;
+    cout<<"Odszyfrowana liczba: ";
+    for(int i=0;i<lenght;i++)
+    {
+        
+        passwordAscii[i]=int(password[i]);
+        passwordAscii[i]=pMod(passwordAscii[i],dKey,nKey);
+        password[i]=char(passwordAscii[i]);
+        cout<<password[i];
+    }
+    cout<<endl;
+    delete [] password;
+    delete [] passwordAscii;
 }
 long long pMod(long long x, long long y, long long m) {
     long long w = x;

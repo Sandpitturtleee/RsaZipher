@@ -1,5 +1,7 @@
 #include <iostream>
 #include <cstring>
+#include <cstdlib>
+#include <stdio.h>
 
 using namespace std;
 
@@ -17,11 +19,12 @@ int main()
     {
         
         passwordAscii[i]=int(password[i]);
-        cout<<passwordAscii[i];
+        password[i]=char(passwordAscii[i]);
+        cout<<password[i];
     }
     cout<<endl;
     delete [] password;
     delete [] passwordAscii;
-    return 0;
+    return *passwordAscii;
     //33
 }
