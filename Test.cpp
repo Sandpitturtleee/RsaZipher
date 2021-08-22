@@ -1,30 +1,27 @@
 #include <iostream>
-#include <cstring>
-#include <cstdlib>
-#include <stdio.h>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
-int main()
+int main() 
 {
-    int lenght = 0;
-    cout<<"Podaj dlugosc hasla: ";
-    cin>>lenght;
-    char *password=new char[lenght];    
-    int *passwordAscii=new int[lenght];
-    cout<<"Podaj haslo: ";
-    cin>>password;
-    //cout<<strlen(password)<<endl;
-    for(int i=0;i<lenght;i++)
-    {
-        
-        passwordAscii[i]=int(password[i]);
-        password[i]=char(passwordAscii[i]);
-        cout<<password[i];
-    }
-    cout<<endl;
-    delete [] password;
-    delete [] passwordAscii;
-    return *passwordAscii;
-    //33
+char *password=new char[13];    
+int *passwordAscii=new int[13*3];
+int LINE = 4;
+cout<< "Podaj linie: ";
+cin>> LINE;
+ifstream f("Passwords.txt");
+string s;
+
+for (int i = 1; i <= LINE; i++)
+        getline(f, s);
+
+for (int i = 0; i < sizeof(password); i++) {
+    password[i] = s[i];
+    cout << password[i];
+}
+delete [] password;
+delete [] passwordAscii;
+return 0;
 }
