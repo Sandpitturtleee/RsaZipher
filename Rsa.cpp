@@ -143,7 +143,7 @@ void cipher() {
     long long c = 0;
     int lenght = 0;
     char *password=new char[lenght];    
-    int *passwordAscii=new int[lenght*32];
+    int *passwordAscii=new int[lenght*3];
     cout << "Podaj klucz publiczny: " << endl;
     cin >> eKey;
     cin >> nKey;
