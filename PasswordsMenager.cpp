@@ -9,25 +9,25 @@ using namespace std;
 void keys();
 void password();
 void cipher();
-void decipher();
+void decipher(int line);
 void read();
-long long pMod(long long x, long long y, long long m);
-long long phi(long long n);
-long long nwd(long long a, long long b);
+unsigned long long pMod(unsigned long long x, unsigned long long y,unsigned long long m);
+unsigned long long phi(unsigned long long n);
+unsigned long long nwd(unsigned long long a,unsigned long long b);
 
 int main()
 {
-    int menu = 0;
+    int mainMenu = 0;
     cout << "--------MENU--------" << endl;
     cout << "1 - Odczyt hasel" << endl;
     cout << "2 - Zapis hasel " << endl;
     cout << "3 - Generator hasel" << endl;
     cout << "4 - Generator kluczy" << endl;
-    cin >> menu;
-    switch (menu)
+    cin >> mainMenu;
+    switch (mainMenu)
     {
     case 1:
-        decipher();
+        read();
         break;
     case 2:
         cipher();
@@ -40,25 +40,25 @@ int main()
         break;
     default:
         cout << "Podaj cyfrę 1-4: " << endl;
-        cin >> menu;
+        cin >> mainMenu;
         break;
     }
     return 0;
 }
 
 void keys() {
-    double p = 0; // Liczba pierwsza 1
-    double q = 0; // Liczba pierwsza 2
+    unsigned long long p = 0; // Liczba pierwsza 1
+    unsigned long long q = 0; // Liczba pierwsza 2
     cout << "Podaj 1 liczbe pierwsza: ";
     cin >> p;
     cout << endl;
     cout << "Podaj 2 liczbe pierwsza: ";
     cin >> q;
     cout << endl;
-    long  n = 0; // n 
-    long euler = 0; // Liczba funckji Eulera
-    long e = 7; // Wykładnik publiczny e
-    long d = 0; // Wykładnik tajny d
+    unsigned long long  n = 0; // n 
+    unsigned long long euler = 0; // Liczba funckji Eulera
+    unsigned long long e = 7; // Wykładnik publiczny e
+    unsigned long long d = 0; // Wykładnik tajny d
     n = p * q;
     euler = (p - 1) * (q - 1);
     cout << "Podaj liczbe e wzglednie pierwsza do " << euler << " z przedzialu 1 < e < " << n << ": ";
@@ -72,7 +72,7 @@ void keys() {
         }
     } while (nwd(e, euler) != 1);
     // Odwrotność modulo
-    long long u, w, z, r;
+    unsigned long long u, w, z, r;
     u = 1; w = e;
     d = 0; z = euler;
     while (w)
@@ -140,83 +140,128 @@ void password() {
     }
     delete [] password;
 }
-void cipher() {
-    long long eKey = 0;
-    long long nKey = 0;
-    long long number = 0;
-    long long c = 0;
-    int lenght = 0;
+void read()
+{
+    int readMenu = 0;
+    int line = 0;
+    cout << "--------MENU--------" << endl;
+    cout << "1 - Google karol7340minecraft@gmail.com" << endl;
+    cout << "2 - Google 1Sandpitturtleee@gmail.com" << endl;
+    cout << "3 - Google 2Sandpitturtleee@gmail.com" << endl;
+    cout << "4 - Google 3Sandpitturtleee@gmail.com" << endl;
+    cout << "5 - World of tanks"<<endl;
+    cin >> readMenu;
+    switch (readMenu)
+    {
+    case 1:
+        decipher(1);
+        break;
+    case 2:
+        decipher(2);
+        break;
+    case 3:
+        decipher(3);
+        break;
+    case 4:
+        decipher(4);
+        break;
+    case 5:
+        decipher(5);
+        break;
+    case 6:
+        decipher(6);
+        break;
+    case 7:
+        decipher(7);
+        break;
+    default:
+        cout << "Podaj cyfrę 1-7: " << endl;
+        cin >> readMenu;
+        break;
+    }
+    
+}
+void cipher() 
+{
+    unsigned long long eKey = 0;
+    unsigned long long nKey = 0;
+    unsigned long long number = 0;
+    unsigned long long c = 0;
+    int lenght = 13;
     char *password=new char[lenght];    
     int *passwordAscii=new int[lenght*3];
+    ofstream f("Passwords.txt",ios::app);
+    //string s;
     cout << "Podaj klucz publiczny: " << endl;
     cin >> eKey;
     cin >> nKey;
     cout << "Klucz publiczny: (" <<eKey<<","<<nKey<<")" <<endl;
-    //cout << "Podaj haslo do zaczyfrowania: ";
-    //cin >> number;
-    cout<<"Podaj dlugosc hasla: ";
-    cin>>lenght;
+    //cout<<"Podaj dlugosc hasla: ";
+    //cin>>lenght;
     cout<<"Podaj haslo: ";
     cin>>password;
-    //cout<<strlen(password)<<endl;
     cout<<"Zaszyfrowana liczba: ";
     for(int i=0;i<lenght;i++)
-    {
-        
+    { 
         passwordAscii[i]=int(password[i]);
         passwordAscii[i]=pMod(passwordAscii[i],eKey,nKey);
         password[i]=char(passwordAscii[i]);
-        cout<<password[i];
+        //s[i] = password[i];
     }
+    string s(password);
+    cout<<s;
+    f << endl << s;
     cout<<endl;
-    //cout << "Zaszyfrowana liczba: " << pMod(number, eKey, nKey);
+    f.close();
     delete [] password;
     delete [] passwordAscii;
 }
-void decipher(){
-    long long dKey = 0;
-    long long nKey = 0;
-    long long number = 0;
-    long long c = 0;
-    int lenght = 0;
+void decipher(int line)
+{
+    unsigned long long dKey = 0;
+    unsigned long long nKey = 0;
+    unsigned long long number = 0;
+    unsigned long long c = 0;
+    int lenght = 13;
     char *password=new char[lenght];    
     int *passwordAscii=new int[lenght*3];
     cout << "Podaj klucz tajny: " << endl;
     cin >> dKey;
     cin >> nKey;
     cout << "Klucz tajny: (" << dKey << "," << nKey << ")" << endl;
-    //cout << "Podaj liczbe do odszyfrowania: ";
-    //cin >> number;
-    //cout << "Odszyfrowana liczba: " << pMod(number, dKey, nKey);
-    cout<<"Podaj dlugosc hasla: ";
-    cin>>lenght;
-    cout<<"Podaj haslo: ";
-    cin>>password;
-    //cout<<strlen(password)<<endl;
-    cout<<"Odszyfrowana liczba: ";
+    //cout<<"Podaj dlugosc hasla: ";
+    //cin>>lenght;
+    ifstream f("Passwords.txt");
+    string s;
+    for (int i = 1; i <= line; i++)
+    {
+        getline(f, s);
+    }
+    cout<<"Odszyfrowane haslo: ";
     for(int i=0;i<lenght;i++)
     {
-        
+        password[i] = s[i];
         passwordAscii[i]=int(password[i]);
         passwordAscii[i]=pMod(passwordAscii[i],dKey,nKey);
         password[i]=char(passwordAscii[i]);
         cout<<password[i];
     }
     cout<<endl;
+    f.close();
     delete [] password;
     delete [] passwordAscii;
 }
 
-long long pMod(long long x, long long y, long long m) {
-    long long w = x;
+unsigned long long pMod(unsigned long long x, unsigned long long y, unsigned long long m) {
+    unsigned long long w = x;
     if (nwd(x, m) == 1)
         y = y % phi(m);
     for (int i = 1; i < y; i++)
         w = (w * x) % m;
     return w;
 }
-long long nwd(long long a, long long b) {
-    long long c;
+unsigned long long nwd(unsigned long long a, unsigned long long b) {
+    unsigned long long c;
     while (b != 0) {
         c = a % b;
         a = b;
@@ -224,9 +269,9 @@ long long nwd(long long a, long long b) {
     }
     return a;
 }
-long long phi(long long n) {
-    long long suma = n;
-    long long dzielnik = 2;
+unsigned long long phi(unsigned long long n) {
+    unsigned long long suma = n;
+    unsigned long long dzielnik = 2;
     while (n != 1) {
         while (n % dzielnik != 0)
             dzielnik++;
@@ -235,35 +280,5 @@ long long phi(long long n) {
             n /= dzielnik;
         }
     }
-    return long(suma);
-}
-void read()
-{
-    int readMenu = 0;
-    cout << "--------MENU--------" << endl;
-    cout << "1 - Google karol7340minecraft@gmail.com" << endl;
-    cout << "2 - Google 1Sandpitturtleee@gmail.com" << endl;
-    cout << "3 - Google 1Sandpitturtleee@gmail.com" << endl;
-    cout << "4 - Google 1Sandpitturtleee@gmail.com" << endl;
-    cout << "5 - World of tanks"<<endl;
-    cin >> readMenu;
-    switch (readMenu)
-    {
-    case 1:
-        
-        break;
-    case 2:
-        
-        break;
-    case 3:
-        
-        break;
-    case 4:
-        
-        break;
-    default:
-        cout << "Podaj cyfrę 1-4: " << endl;
-        cin >> readMenu;
-        break;
-    }
+    return suma;
 }
